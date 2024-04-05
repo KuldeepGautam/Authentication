@@ -1,8 +1,25 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
+// import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl + "/auth";
+export async function login(username, password) {
+  const apiEndpoint = `/verifyCredentials?username=${username}&password=${password}`;
 
-export function login(email, password) {
-  return http.post(apiEndpoint, { email, password });
+  const { data } = await http.get(apiEndpoint);
+
+  console.log(data);
+
+  const response = data.response;
+  if (response && response.responseStatus === "0") {
+    sessionStorage.setItem("name", response.data.name);
+    sessionStorage.setItem("username", username);
+    sessionStorage.setItem("password", password);
+  }
 }
+
+export default {
+  login,
+  // loginWithJwt,
+  // getCurrentUser,
+  // logout,
+  // getJwt
+};
