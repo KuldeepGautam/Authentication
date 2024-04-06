@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import config from "../config";
-import axios from "axios";
+// import config from "../config";
+// import axios from "axios";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -18,26 +18,17 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      // const response = await fetch(
-      //   `https://ip.sisrtd.com/api/verifyCredentials?username=${username}&password=${password}`
-      // );
-      // const data = await response.json();
-      const response = await axios.get(
-        "https://ip.sisrtd.com/api/verifyCredentials",
-        { mode: "cors" },
-        {
-          params: {
-            username: username,
-            password: password,
-          },
-        }
+      const response = await fetch(
+        `https://ip.sisrtd.com/api/verifyCredentials?username=${username}&password=${password}`
       );
+      const data = await response.json();
 
-      const data = response.data;
-      console.log(data);
       if (data.success) {
-        setMessage("Data Successfully submitted.....!!");
-      } else setMessage("Failed......!");
+        setMessage("Login successful");
+        // Redirect or perform any other action upon successful login
+      } else {
+        setMessage("Login failed. Please check your credentials.");
+      }
     } catch (error) {
       setMessage("An error occurred. Please try again later.");
     }
@@ -60,7 +51,7 @@ function LoginForm() {
           />
         </div>
         <div className="form-control">
-          <label htmlFor="password">Name</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
