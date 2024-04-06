@@ -20,6 +20,7 @@ const LoginForm = () => {
         `https://ip.sisrtd.com/api/verifyCredentials?username=${username}&password=${password}`
       );
       const data = await response.json();
+      console.log(response);
       console.log(data);
       if (data.success) {
         setMessage("Data Successfully submitted.....!!");
@@ -35,21 +36,25 @@ const LoginForm = () => {
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div className="form-control">
-          <label htmlFor="username">Name</label>
+          <label>Name</label>
           <input
             type="text"
             id="username"
+            name="username"
             value={username}
             onChange={handleChangeUsername}
+            autoComplete="username"
           />
         </div>
         <div className="form-control">
-          <label htmlFor="password">Name</label>
+          <label>Name</label>
           <input
             type="password"
             id="password"
+            name="password"
             value={password}
             onChange={handleChangePassword}
+            autoComplete="password"
           />
         </div>
         <button type="button">Submit</button>
