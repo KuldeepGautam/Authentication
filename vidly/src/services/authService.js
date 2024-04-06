@@ -1,5 +1,6 @@
 // import jwtDecode from "jwt-decode";
 import http from "./httpService";
+<<<<<<< HEAD
 
 // const apiEndpoint = `${apiUrl}/auth`;
 // const tokenKey = "token";
@@ -9,6 +10,13 @@ import http from "./httpService";
 export async function login(username, password) {
   const apiEndpoint = `/verifyCredentials?username=${username}&password=${password}`;
 
+=======
+// import { apiUrl } from "../config.json";
+
+export async function login(username, password) {
+  const apiEndpoint = `/verifyCredentials?username=${username}&password=${password}`;
+
+>>>>>>> 7b65324f918bffbb03475c4f5a0472462733a231
   const { data } = await http.get(apiEndpoint);
 
   console.log(data);
@@ -18,6 +26,7 @@ export async function login(username, password) {
     sessionStorage.setItem("name", response.data.name);
     sessionStorage.setItem("username", username);
     sessionStorage.setItem("password", password);
+<<<<<<< HEAD
     // sessionStorage.setItem("customerId", response.data.customerId);
     // sessionStorage.setItem("customerName", response.data.customerName);
   }
@@ -53,6 +62,11 @@ export async function login(username, password) {
 //   return localStorage.getItem(tokenKey);
 // }
 
+=======
+  }
+}
+
+>>>>>>> 7b65324f918bffbb03475c4f5a0472462733a231
 export default {
   login,
   // loginWithJwt,
