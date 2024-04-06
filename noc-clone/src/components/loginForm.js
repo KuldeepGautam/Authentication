@@ -56,11 +56,7 @@ function LoginForm() {
           />
         </div>
         <div className="form-control">
-<<<<<<< HEAD
-          <label>Name</label>
-=======
           <label htmlFor="password">Password</label>
->>>>>>> 8aa417bd1f45b61e8246741e3c53267fcaedfea9
           <input
             type="password"
             name="password"
