@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+// import config from "../config";
+// import axios from "axios";
 
-const LoginForm = () => {
+function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -20,12 +22,19 @@ const LoginForm = () => {
         `https://ip.sisrtd.com/api/verifyCredentials?username=${username}&password=${password}`
       );
       const data = await response.json();
+<<<<<<< HEAD
       console.log(response);
       console.log(data);
+=======
+
+>>>>>>> 8aa417bd1f45b61e8246741e3c53267fcaedfea9
       if (data.success) {
-        setMessage("Data Successfully submitted.....!!");
-      } else setMessage("Failed......!");
-    } catch (er) {
+        setMessage("Login successful");
+        // Redirect or perform any other action upon successful login
+      } else {
+        setMessage("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
       setMessage("An error occurred. Please try again later.");
     }
   };
@@ -33,7 +42,7 @@ const LoginForm = () => {
   return (
     <div>
       <h3>Login Form</h3>
-      <p>{message}</p>
+      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label>Name</label>
@@ -47,9 +56,14 @@ const LoginForm = () => {
           />
         </div>
         <div className="form-control">
+<<<<<<< HEAD
           <label>Name</label>
+=======
+          <label htmlFor="password">Password</label>
+>>>>>>> 8aa417bd1f45b61e8246741e3c53267fcaedfea9
           <input
             type="password"
+            name="password"
             id="password"
             name="password"
             value={password}
@@ -57,10 +71,10 @@ const LoginForm = () => {
             autoComplete="password"
           />
         </div>
-        <button type="button">Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
-};
+}
 
 export default LoginForm;
