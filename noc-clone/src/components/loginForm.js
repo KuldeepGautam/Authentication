@@ -68,8 +68,10 @@ function LoginForm() {
         sessionStorage.setItem("customerId", response.data.customerId);
         sessionStorage.setItem("customerName", response.data.customerName);
       } else {
+        setTimeout(() => {
+          navigate("/home");
+        }, 2000);
         setMessage("Login successful");
-        navigate("/home");
         // setMessage("Login failed. Please check your credentials.");
       }
     } catch (error) {
