@@ -45,34 +45,26 @@ function LoginForm() {
       //   );
       //   const data = await response.json();
 
-      const response = await axios.get(
-        "https://ip.sisrtd.com/api/verifyCredentials",
-        {
-          params: {
-            username: username,
-            password: password,
-          },
-        }
+      const { data } = await axios.get(
+        `https://ip.sisrtd.com/api/verifyCredentials?username=${username}&password=${password}`
       );
 
-      const data = response.data;
+      const response = data.response;
       console.log(response.data);
-      if (
-        data.response &&
-        response.responseStatus === "0" &&
-        getCurrentUser()
-      ) {
-        sessionStorage.setItem("name", response.data.name);
+      if (response && response.responseStatus === "0") {
+        const user = response.data;
+
+        sessionStorage.setItem("name", user.name);
         sessionStorage.setItem("username", username);
         sessionStorage.setItem("password", password);
-        sessionStorage.setItem("customerId", response.data.customerId);
-        sessionStorage.setItem("customerName", response.data.customerName);
-      } else {
+        sessionStorage.setItem("customerId", user.customerId);
+        sessionStorage.setItem("customerName", user.customerName);
+        setMessage("Login successful");
         setTimeout(() => {
           navigate("/home");
-        }, 2000);
-        setMessage("Login successful");
-        // setMessage("Login failed. Please check your credentials.");
+        }, 3000);
+      } else {
+        setMessage("Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error(error);
